@@ -1,0 +1,27 @@
+---
+version: "2.4"
+services:
+  putty:
+    image: jlesage/putty:v1.4.0
+    container_name: putty
+    hostname: putty
+    domainname: devsupport
+    restart: unless-stopped
+    networks:
+      default:
+        ipv4_address: 172.11.1.83
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - VNC_PASSWORD=VMware1!
+    volumes:
+      - /data/putty:/config:rw
+    ports:
+      - 1314:5800
+
+
+networks:
+  default:
+    name: docker_devnet
+    external: true
